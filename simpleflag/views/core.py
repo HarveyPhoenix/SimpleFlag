@@ -8,17 +8,17 @@ from flask import abort
 app = Flask(__name__)
 
 def permission_required(permission):
-	def check_token(func):
+    def check_token(func):
         # @wraps(func)
-		def decorated_function(*args, **kwargs):
-			if request.form['token']:
-                abort(400)
+        def decorated_function(*args, **kwargs):
+            if request.form['token']:
+                abort(200)
                 req_token = request.form['token']
-				if req_token == "123456":
-					return func(*args, **kwargs)
-			abort(403)
-		return decorated_function
-	return check_token
+                if req_token == "123456":
+                    return func(*args, **kwargs)
+            abort(403)
+        return decorated_function
+    return check_token
 
 
 @app.route('/')
